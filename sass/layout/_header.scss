@@ -1,0 +1,158 @@
+.header {
+  height: 85vh;
+  background-image: linear-gradient(
+      rgba($color-green-light, 0.1),
+      rgba($color-green-light, 0.6)
+    ),
+    url(../../img/header_img_wayup.jpeg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+
+
+  @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    height: 95vh;
+  }
+
+  // Resolution (192dpi) of Apple Retina Screen (High Resolution) | -webkit for safari
+  @media only screen and (min-resolution:192dpi) and (min-width: 37.5em), only screen and(-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em), only screen and (min-width: 125em) {
+    background-image: linear-gradient(
+      to right bottom,
+      rgba($color-green-light, 0.1),
+      rgba($color-green-light, 0.6)
+    ),
+    url(../../img/header_img_wayup.jpeg);
+  }
+
+  @include respond(phone) {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+  } 
+
+  &__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+
+    @include respond(phone) {
+      top: 3rem;
+      right: 3rem;
+    }
+  }
+
+  &__logo {
+    height: 3.5rem;
+  }
+
+  &__text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+    z-index: 1;
+
+    display: grid;
+    grid-template-rows: repeat(2, minmax(4rem, min-content));
+    grid-template-columns: minmax(5rem, max-content);
+    
+    @include respond(phone) {
+      grid-template-columns: minmax(7rem, max-content);
+    }
+
+    &--heading-main {
+      grid-row: 1 / 2;
+    }
+
+    &--heading-sub {
+      grid-row: 2 / 3;
+    }
+  }
+
+  &__author {
+    position: absolute;
+    top: 60%;
+    left: 4rem;
+    transform: translate(-50%, -50%);
+    width: 96%;
+
+    display: grid;
+    grid-template-columns: 20rem .3fr;
+
+    animation-name: moveInBottom;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    animation-delay: 2s;
+
+    visibility: hidden;
+
+    @include respond(phone-land) {
+      top: 53%;
+      width: 90%;
+      grid-template-columns: 16rem .3fr;
+    }
+
+    @include respond(phone) {
+      top: 60%;
+      left: 10%;
+      grid-template-columns: 13rem .7fr;
+    }
+
+    &--portrait {
+      align-self: center;
+      justify-self: flex-start;
+      
+      img {
+        display: inline-block;
+        width: 15rem;
+        border-radius: 50%;
+        margin-top: 1rem;
+
+        @include respond(phone-land) {
+          width: 12rem;
+        }
+
+        @include respond(phone) {
+          width: 10rem;
+        }
+      }
+    }
+
+    &--quote {
+      align-self: center;
+      justify-self: flex-start;
+
+      font-size: 1.2rem;
+      color: $color-grey-light-2;
+
+      position: relative;
+
+      &::before {
+        position: absolute;
+        top: -1.5rem;
+        left: -2rem;
+
+        content: "\201C";
+        line-height: 1;
+        font-size: 5rem;
+        color: $color-grey-dark-5;
+        font-family: sans-serif;
+        opacity: 0.8;
+        z-index: 1;
+      }
+
+      @include respond(phone-small) {
+        font-size: 1rem;
+      }
+    }
+
+    &--btn {
+      grid-column: 2 / 3;
+    }
+  }
+}
